@@ -22,6 +22,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         int cur = seq[i];
         
+        // 에라토스테네스의 체 응용
         for (int i = 2; cur * i <= MAX; i++) {
             int next = cur * i;
             if (isIn[next]) {
