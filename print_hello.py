@@ -1,1 +1,2 @@
-if (__main__) print("hello")
+if (__main__):
+    print("hello")
