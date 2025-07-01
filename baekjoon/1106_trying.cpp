@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <queue>
+
+#define INF 987654321
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -10,33 +11,36 @@ int main() {
     std::cin >> c >> n;
     
     std::vector<std::pair<int, int>> store(n);
+    std::vector<int> ans(c+101, INF);
     
-    // { 비용, 몇 명 }
-    std::priority_queue<std::pair<int, int>> q;
+    int sol = INF;
     
     for (int i = 0; i < n; i++) {
         int a, b;
         std::cin >> a >> b;
         
         store[i] = {a, b};
-        q.push({-a, b});
+        
+        ans[b] = std::min(ans[b], a);
     }
     
-    while (!q.empty()) {
-        int curCost = -q.top().first;
-        int curNum = q.top().second;
-        q.pop();
+    for (int i = 2; i <= c+100; i++) {
         
-        if (curNum >= c) {
-            std::cout << curCost;
-            break;
-        }
-        
-        for (int i = 0; i < n; i++) {
-            int nextCost = curCost + store[i].first;
-            int nextNum = curNum + store[i].second;
+        for (int j = 0; j < n; j++) {
+            int bi = i - store[j].second;
             
-            q.push({-nextCost, nextNum});
+            if (bi > 0) {
+                ans[i] = std::min(ans[i], store[j].first + ans[bi]);
+            }
+            
         }
+        
+        if (i >= c) {
+            sol = std::min(sol, ans[i]);
+        }
+        
     }
+
+    std::cout << sol;
+    
 }
