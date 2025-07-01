@@ -13,6 +13,9 @@ int main() {
     std::vector<std::pair<int, int>> store(n);
     std::vector<int> ans(c+101, INF);
     
+    // 추가
+    ans[0] = 0;
+    
     int sol = INF;
     
     for (int i = 0; i < n; i++) {
@@ -24,7 +27,8 @@ int main() {
         ans[b] = std::min(ans[b], a);
     }
     
-    for (int i = 2; i <= c+100; i++) {
+    // 수정 i = 2 -> i = 1
+    for (int i = 1; i <= c+100; i++) {
         
         for (int j = 0; j < n; j++) {
             int bi = i - store[j].second;
