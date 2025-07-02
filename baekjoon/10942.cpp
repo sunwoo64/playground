@@ -2,18 +2,27 @@
 #include <vector>
 
 bool setFal(std::vector<std::vector<int>>& isFal, std::vector<int>& seq, int s, int e) {
+    
+    if (isFal[s][e] != -1) return isFal[s][e];
+    
+    if (seq[s] != seq[e]) {
+        isFal[s][e] = 0;
+        return false;
+    }
+    
+    if (s+1 > e-1) return isFal[s][e] = (seq[s] == seq[e]);
+    
     if (s == e) {
-        isFal[s][e] = 1;
-        return true;
+        return isFal[s][e] = 1;
     } else {
+        bool state = setFal(isFal, seq, s+1, e-1);
         
-        if (isFal[s][e] != -1) return isFal[s][e];
-        
-        else if (s+1 <= e-1 && setFal(isFal, seq, s+1, e-1)) {
-            isFal[s][e] = true;
+        if (s+1 <= e-1 && state) {
+            isFal[s][e] = 1;
+            return true;
         }
         
-        return seq[s] == seq[e];
+        return state;
     }
 }
 
