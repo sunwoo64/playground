@@ -25,7 +25,6 @@ int main() {
         dp[i] = std::max(dp[i-1], dp[i]);
         if (ni <= n+1) {
             dp[ni] = std::max(dp[i] + P[i], dp[ni]);
-            ans = std::max(ans, dp[ni]);   
         }
     }
     
