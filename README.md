@@ -7,9 +7,5 @@
   - 추가예정
 
 ```Python
-print("hello README.md!")
-```
-
-```Cpp
-std::cout << "Happy" << std::endl;
+print("Hello README.md!")
 ```
